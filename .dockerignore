@@ -1,0 +1,24 @@
+# Ignorar dependências do Node.js
+frontend/react-app/node_modules
+
+# Ignorar pastas de build do frontend
+frontend/react-app/build
+
+# Ignorar arquivos de cache do Python
+__pycache__/
+*.pyc
+
+# Ignorar arquivos de cache do Pytest
+.pytest_cache/
+
+# Ignorar arquivos do Git
+.git
+.gitignore
+
+# Ignorar arquivos do Docker
+.dockerignore
+Dockerfile
+docker-compose.yml
+
+# Ignorar banco de dados local
+app.db

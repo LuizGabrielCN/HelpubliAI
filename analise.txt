@@ -1,0 +1,46 @@
+LoginPage:
+
+violation: Elements must meet minimum color contrast ratio thresholds
+
+Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds
+More info...
+
+    #email-label
+    Serious
+    Element has insufficient color contrast of 4.25 (foreground color: #757575, background color: #f4f6f8, font size: 12.0pt (16px), font weight: normal). Expected contrast ratio of 4.5:1
+    #password-label
+    Serious
+    Element has insufficient color contrast of 4.25 (foreground color: #757575, background color: #f4f6f8, font size: 12.0pt (16px), font weight: normal). Expected contrast ratio of 4.5:1
+
+cat.color
+wcag2aa
+wcag143
+TTv5
+TT13.c
+EN-301-549
+EN-9.1.4.3
+ACT
+
+Incomplete:
+Elements must meet minimum color contrast ratio thresholds
+
+Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds
+More info...
+
+    #email
+    Serious
+    Element's background color could not be determined because it is overlapped by another element
+    #password
+    Serious
+    Element's background color could not be determined because it is overlapped by another element
+
+cat.color
+wcag2aa
+wcag143
+TTv5
+TT13.c
+EN-301-549
+EN-9.1.4.3
+ACT
+
+22passes:

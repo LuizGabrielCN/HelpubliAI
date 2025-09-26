@@ -1,0 +1,21 @@
+services:
+  backend:
+    # Constrói a imagem a partir do Dockerfile no diretório atual
+    build: .
+    
+    # Mapeia a porta 5000 do host para a porta 5000 do container
+    ports:
+      - "5000:5000"
+      
+    # Monta o diretório atual do projeto para /app no container
+    # Isso permite que as alterações no código sejam refletidas ao vivo
+    volumes:
+      - .:/app
+      
+    # Variáveis de ambiente para o Flask
+    environment:
+      - FLASK_APP=backend/run.py
+      - FLASK_ENV=development
+      
+    # Comando para iniciar o servidor de desenvolvimento do Flask
+    command: flask run --host=0.0.0.0
