@@ -1,49 +1,38 @@
-# Plano de Ação: Análise e Melhorias do Frontend
+# Plano de Ação: Análise e Melhorias do Frontend (Atualizado)
 
-## 1. Resumo da Análise
+## 1. Resumo do Estado Atual
 
-A estrutura atual do frontend é híbrida, contendo:
-1.  **Páginas estáticas:** Um conjunto de arquivos `html`, `css` e `js` na pasta `frontend/` que parecem lidar com funcionalidades-chave como login, registro e o dashboard de admin.
-2.  **Aplicação React:** Uma aplicação moderna (`frontend/react-app/`) criada com `create-react-app`, utilizando Material-UI (MUI), Tiptap (editor de texto), Storybook e React Router.
+A análise inicial apontava uma estrutura híbrida com páginas estáticas e uma aplicação React. No entanto, o projeto evoluiu e a estrutura foi unificada com sucesso na aplicação React. As páginas estáticas legadas (`login.html`, `admin-dashboard.html`, etc.) já foram removidas, e a base de código está centralizada em `frontend/react-app/`.
 
-Essa estrutura dupla pode gerar inconsistências de UI/UX, dificultar a manutenção e duplicar esforços. O plano de ação visa unificar a experiência do usuário e a base de código dentro da aplicação React.
+As ferramentas de qualidade de código e documentação de componentes, como Prettier e Storybook, já estão configuradas e em uso.
 
-## 2. Pontos de Melhoria Identificados
+## 2. Itens Concluídos (Fases 1 e 2)
 
-### a. Base de Código e Dependências (React App)
-- **Dependências:** O `package.json` mostra uma base sólida, mas uma auditoria (`npm audit`) é recomendada para identificar vulnerabilidades. As dependências do Storybook estão na seção `devDependencies`, o que é uma boa prática.
-- **Qualidade de Código:** O projeto já possui uma configuração do ESLint. A adição do **Prettier** para formatação automática de código é recomendada para manter um estilo consistente em toda a equipe.
-- **Estrutura de Pastas:** A estrutura (`components`, `pages`, `hooks`, `services`) é lógica e escalável.
+As fases iniciais do plano de ação foram concluídas com sucesso, seja por já terem sido implementadas anteriormente ou pelas ações recentes.
 
-### b. Componentização e UI/UX
-- **Storybook:** O uso do Storybook é um excelente começo. No entanto, poucos componentes (`Button`, `Header`, `Page`, etc.) e páginas (`LoginPage`) estão documentados. Expandir o Storybook para cobrir todos os componentes da UI (especialmente os do MUI) e estados de página é crucial.
-- **Consistência de UI:** A biblioteca MUI (`@mui/material`) e um arquivo de tema (`src/theme.js`) foram configurados, o que é ótimo para a consistência visual. O desafio é garantir que as páginas estáticas (se mantidas) sigam o mesmo design system.
-- **Migração:** As páginas estáticas (`admin-dashboard.html`, `login.html`, `register.html`) devem ser migradas para se tornarem páginas dentro da aplicação React, aproveitando o React Router, os componentes reutilizáveis e o design system do MUI.
+- **✅ Unificação do Frontend:** O projeto não é mais híbrido. Toda a interface está consolidada na aplicação React.
+- **✅ Remoção de Código Legado:** Os arquivos estáticos (`.html`, `js/`, `css/`) foram removidos, simplificando a estrutura do projeto.
+- **✅ Qualidade de Código:** O Prettier foi integrado ao ESLint, garantindo um padrão de formatação consistente.
+- **✅ Migração de Funcionalidades:** As páginas de autenticação e o dashboard de administração já são componentes React (`LoginPage.js`, `AdminDashboardPage.js`).
+- **✅ Documentação no Storybook:** Todos os componentes reutilizáveis na pasta `src/components` possuem "stories" correspondentes.
+- **✅ Testes de Acessibilidade:** O addon de acessibilidade (`@storybook/addon-a11y`) está instalado e configurado no Storybook.
 
-### c. Performance e Acessibilidade
-- **Performance:** A aplicação React já faz "code splitting" (divisão de código), o que é bom para o tempo de carregamento inicial. Recomenda-se uma análise com o **Lighthouse** (ferramenta do Chrome DevTools) para identificar gargalos de performance, SEO e PWA (Progressive Web App).
-- **Acessibilidade (a11y):** É fundamental garantir que a aplicação seja acessível a todos. Recomenda-se usar o addon `@storybook/addon-a11y` para verificar a acessibilidade dos componentes diretamente no Storybook.
+## 3. Pendências e Próximos Passos (Fase 3)
 
-## 3. Plano de Ação Sugerido
+Com a fundação do projeto sólida, o foco agora é na otimização e refinamento.
 
-### Fase 1: Fundação e Unificação (Curto Prazo)
+### a. Auditoria de Vulnerabilidades (Pendente)
+- **Status:** A execução de `npm audit` revelou 9 vulnerabilidades que exigem uma atualização forçada (`npm audit fix --force`).
+- **Ação Necessária:** Requer decisão do usuário, pois a atualização forçada pode introduzir "breaking changes".
 
-1.  **Decisão Estratégica:** Oficializar a migração de todas as funcionalidades das páginas estáticas para a aplicação React. As páginas antigas devem ser arquivadas ou removidas após a migração.
-2.  **Setup de Qualidade de Código:**
-    - Executar `npm audit --fix` para corrigir vulnerabilidades conhecidas.
-    - Instalar e configurar o **Prettier** com o ESLint para padronizar a formatação do código.
-3.  **Migração da Autenticação:**
-    - Criar as páginas de Login (`LoginPage.js`) e Registro (`RegisterPage.js`) que já existem no React para substituir `login.html` and `register.html`.
-    - Garantir que o `auth.js` e a lógica de API (`api.js`) sejam totalmente integrados aos serviços React (`src/services/api.js`).
+### b. Otimização e Refinamento (Próximos Passos)
 
-### Fase 2: Expansão e Consolidação (Médio Prazo)
+1.  **Auditoria de Performance com Lighthouse:**
+    - **Objetivo:** Analisar a aplicação em execução para identificar gargalos de performance, acessibilidade, SEO e PWA (Progressive Web App).
+    - **Pré-requisito:** A aplicação precisa estar em execução.
 
-1.  **Migração do Dashboard:** Migrar o `admin-dashboard.html` para uma nova página na aplicação React (`AdminDashboardPage.js`), utilizando os componentes do MUI, como o `UsersTable.js` que já existe.
-2.  **Cobertura do Storybook:** Documentar todos os componentes de UI reutilizáveis e as principais páginas no Storybook. Para cada componente, criar "stories" para seus diferentes estados (ex: botão desabilitado, formulário com erro, etc.).
-3.  **Testes de Acessibilidade:** Configurar o addon de acessibilidade no Storybook e corrigir os problemas reportados.
+2.  **Aumento da Cobertura de Testes:**
+    - **Objetivo:** Analisar a cobertura de testes unitários e de integração (`*.test.js`) e expandi-la para hooks, serviços e componentes críticos, garantindo a estabilidade da aplicação.
 
-### Fase 3: Otimização e Refinamento (Longo Prazo)
-
-1.  **Auditoria de Performance:** Realizar uma auditoria completa com o Lighthouse na aplicação unificada. Implementar otimizações sugeridas, como "lazy loading" de rotas/componentes com `React.lazy()`.
-2.  **Testes Unitários e de Integração:** Aumentar a cobertura de testes (`*.test.js`) para os hooks, serviços e componentes críticos, garantindo a estabilidade da aplicação à medida que ela cresce.
-3.  **Remoção de Código Legado:** Após a migração completa e verificação, remover definitivamente os arquivos estáticos (`.html`, `js/`, `css/`) da pasta `frontend/` para simplificar o projeto.
+3.  **Otimizações Sugeridas pelo Lighthouse:**
+    - **Objetivo:** Implementar as melhorias recomendadas pela auditoria, como "lazy loading" de rotas/componentes com `React.lazy()` para otimizar o tempo de carregamento inicial.
