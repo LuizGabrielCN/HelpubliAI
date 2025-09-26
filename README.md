@@ -26,6 +26,29 @@ A estrutura foi otimizada para separar claramente o backend do frontend:
 └── runtime.txt      # Versão do Python para deploy
 ```
 
+## ✨ Tecnologias e Ferramentas
+
+Este projeto utiliza uma combinação de tecnologias modernas para o desenvolvimento full-stack.
+
+### **Backend**
+*   **Python 3.11+**
+*   **Flask:** Microframework web para construir a API REST.
+*   **Flask-SQLAlchemy:** ORM para interação com o banco de dados.
+*   **Flask-Migrate (Alembic):** Para gerenciamento de migrações do esquema do banco de dados.
+*   **Flask-JWT-Extended:** Para autenticação baseada em JSON Web Tokens (JWT).
+*   **Gunicorn:** Servidor WSGI para deploy.
+
+### **Frontend**
+*   **React:** Biblioteca para construir a interface de usuário.
+*   **Material-UI (MUI):** Biblioteca de componentes React para um design moderno e consistente.
+*   **React Router:** Para gerenciamento de rotas no lado do cliente.
+*   **Tiptap:** Editor de texto rico (Rich Text Editor) para uma melhor experiência de criação de conteúdo.
+
+### **Ferramentas e Boas Práticas**
+*   **Docker:** Para containerização da aplicação, garantindo um ambiente de desenvolvimento e produção consistente.
+*   **Storybook:** Para desenvolver e documentar componentes de UI de forma isolada.
+*   **ESLint & Prettier:** Para garantir a qualidade e a padronização do código no frontend.
+
 ## Como Configurar e Executar
 
 Siga os passos abaixo para ter o ambiente de desenvolvimento funcionando.
@@ -33,75 +56,63 @@ Siga os passos abaixo para ter o ambiente de desenvolvimento funcionando.
 ### Pré-requisitos
 
 - Python 3.11 ou superior
-- pip (gerenciador de pacotes do Python)
+- Node.js e npm (para o frontend React)
+- Docker (opcional, para rodar com containers)
 
 ### 1. Clonar e Acessar o Repositório
 
 ```bash
-# (Se estiver no Git)
-git clone <url-do-repositorio>
-cd HelpubliAI-Final
+git clone https://github.com/LuizGabrielCN/HelpubliAI.git
+cd HelpubliAI
 ```
 
-### 2. Criar e Ativar o Ambiente Virtual
+### 2. Configurar o Backend (Python)
+
+**a. Criar e Ativar o Ambiente Virtual:**
 
 É uma boa prática usar um ambiente virtual para isolar as dependências do projeto.
 
-**No Windows:**
+*No Windows:*
 ```bash
 python -m venv venv
 .\venv\Scripts\activate
 ```
 
-**No macOS/Linux:**
+*No macOS/Linux:*
 ```bash
 python3 -m venv venv
 source venv/bin/activate
 ```
 
-### 3. Instalar as Dependências
+**b. Instalar as Dependências:**
 
-Com o ambiente virtual ativado, instale todas as bibliotecas Python necessárias:
+Com o ambiente virtual ativado, instale todas as bibliotecas Python:
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### 4. Configurar Variáveis de Ambiente
+**c. Configurar Variáveis de Ambiente:**
 
-O backend precisa de algumas variáveis de ambiente para funcionar. Crie um arquivo chamado `.env` dentro da pasta `backend/` (`backend/.env`) e adicione o seguinte conteúdo, substituindo os valores conforme necessário:
+Crie um arquivo chamado `.env` na pasta `backend/` (`backend/.env`) e adicione as seguintes variáveis, substituindo os valores conforme necessário:
 
 ```
 # Chave secreta para o Flask e JWT (use valores aleatórios e seguros)
 SECRET_KEY='uma-chave-secreta-muito-forte'
 JWT_SECRET_KEY='outra-chave-secreta-super-segura'
 
-# URL do Banco de Dados
-# Para SQLite (padrão):
+# URL do Banco de Dados (SQLite por padrão)
 DATABASE_URL='sqlite:///../instance/app.db'
-# Para PostgreSQL (exemplo):
-# DATABASE_URL='postgresql://user:password@host:port/dbname'
 
 # Chave da API do Google Generative AI
 GOOGLE_API_KEY='SUA_API_KEY_DO_GOOGLE_AI'
-
-# Configuração de Email (opcional, para recuperação de senha)
-MAIL_SERVER=smtp.example.com
-MAIL_PORT=587
-MAIL_USE_TLS=True
-MAIL_USERNAME=seu-email@example.com
-MAIL_PASSWORD=sua-senha-de-email
-MAIL_DEFAULT_SENDER=seu-email@example.com
 ```
 
-**Importante:** O arquivo `.gitignore` já está configurado para ignorar o arquivo `.env`, garantindo que suas chaves secretas não sejam enviadas para o repositório Git.
+**d. Aplicar as Migrações do Banco de Dados:**
 
-### 5. Aplicar as Migrações do Banco de Dados
-
-Para criar o banco de dados e as tabelas, execute os seguintes comandos a partir da raiz do projeto (`HelpubliAI-Final/`):
+Para criar o banco de dados e as tabelas, execute os seguintes comandos a partir da raiz do projeto:
 
 ```bash
-# Define o app Flask para o CLI
 # (No Windows CMD)
 set FLASK_APP=backend.run:app
 # (No PowerShell)
@@ -109,16 +120,32 @@ $env:FLASK_APP="backend.run:app"
 # (No macOS/Linux)
 export FLASK_APP=backend/run.py
 
-# Executa as migrações
 flask db upgrade
 ```
 
-### 6. Executar a Aplicação
+### 3. Configurar o Frontend (React)
 
-Finalmente, para iniciar o servidor de desenvolvimento, execute:
+**a. Acessar a pasta do React e instalar as dependências:**
 
+```bash
+cd frontend/react-app
+npm install
+```
+
+### 4. Executar a Aplicação
+
+**a. Iniciar o Backend:**
+
+Na raiz do projeto, com o ambiente virtual ativado:
 ```bash
 python backend/run.py
 ```
+O servidor do backend estará disponível em `http://127.0.0.1:5000`.
 
-O servidor estará disponível em `http://127.0.0.1:5000`.
+**b. Iniciar o Frontend:**
+
+Em outro terminal, dentro da pasta `frontend/react-app`:
+```bash
+npm start
+```
+A aplicação React estará disponível em `http://localhost:3000` e se comunicará com o backend.
